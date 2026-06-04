@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resultados Capacitación PAP · Gendarmería del Maule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#13293d; --navy2:#1b3a5b; --steel:#2f6690; --teal:#3a7d7d;
+    --gold:#9c7a2c; --ink:#1c2832; --muted:#697885; --line:#d9e1e8;
+    --bg:#f3f6f8; --card:#ffffff; --good:#2c7a51; --track:#e9eef2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'IBM Plex Sans',sans-serif;color:var(--ink);background:var(--bg);
+    line-height:1.55;-webkit-font-smoothing:antialiased;padding:30px 18px 56px}
+  .wrap{max-width:1060px;margin:0 auto}
+
+  /* LOGO BAR */
+  .logobar{background:#fff;border:1px solid var(--line);border-bottom:0;border-radius:6px 6px 0 0;
+    padding:14px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .logobar img{height:52px;width:auto;object-fit:contain}
+  .logobar .ph{height:52px;min-width:150px;border:1px dashed #b9c6d0;border-radius:5px;
+    display:flex;align-items:center;justify-content:center;font-size:10.5px;color:#9aa9b5;
+    text-align:center;padding:4px 10px;line-height:1.3}
+  .logobar img.ph-on{display:none}
+
+  header{background:var(--navy);color:#fff;border-radius:0 0 6px 6px;padding:32px 38px;
+    border-top:4px solid var(--gold);position:relative}
+  .eyebrow{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#9bb4cb;font-weight:600}
+  header h1{font-family:'Source Serif 4',serif;font-weight:700;font-size:clamp(25px,4.2vw,38px);
+    line-height:1.1;margin:10px 0 8px;letter-spacing:-.005em}
+  .sub{color:#c4d3e0;font-size:14.5px;max-width:680px}
+  .meta{display:flex;flex-wrap:wrap;gap:0;margin-top:20px;border-top:1px solid #ffffff22;padding-top:16px}
+  .meta div{font-size:12.5px;color:#d4e0ea;padding-right:22px;margin-right:22px;border-right:1px solid #ffffff22}
+  .meta div:last-child{border:0;margin:0;padding:0}
+  .meta b{font-weight:600;display:block;font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:#9bb4cb;margin-bottom:2px}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}
+  .kpi{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--steel);
+    border-radius:5px;padding:20px 18px;opacity:0;transform:translateY(12px);animation:rise .55s forwards}
+  .kpi:nth-child(2){border-top-color:var(--teal)}
+  .kpi:nth-child(3){border-top-color:var(--gold)}
+  .kpi:nth-child(4){border-top-color:var(--good)}
+  .kpi:nth-child(1){animation-delay:.05s}.kpi:nth-child(2){animation-delay:.12s}
+  .kpi:nth-child(3){animation-delay:.19s}.kpi:nth-child(4){animation-delay:.26s}
+  .kpi .num{font-family:'Source Serif 4',serif;font-weight:700;font-size:38px;line-height:1;color:var(--navy)}
+  .kpi .num small{font-size:17px;font-weight:600;color:var(--steel)}
+  .kpi .lab{font-size:12.5px;color:var(--ink);margin-top:9px;font-weight:500;line-height:1.4}
+  .kpi .note{font-size:11.5px;color:var(--muted);margin-top:5px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:6px;
+    padding:26px 30px;margin-bottom:16px}
+  .card h2{font-family:'Source Serif 4',serif;font-weight:700;font-size:20px;color:var(--navy);
+    padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:6px}
+  .card .lead{color:var(--muted);font-size:13px;margin:10px 0 20px}
+
+  .legend{display:flex;gap:20px;font-size:12px;color:var(--muted);margin-bottom:16px;font-weight:500}
+  .legend i{display:inline-block;width:16px;height:10px;border-radius:2px;vertical-align:middle;margin-right:7px}
+  .lpre{background:#b7c7d4}.lpost{background:var(--navy2)}
+  .row{display:grid;grid-template-columns:218px 1fr 120px;gap:16px;align-items:center;
+    padding:9px 0;border-bottom:1px solid #f0f4f7}
+  .row:last-child{border:0}
+  .row .name{font-size:12.5px;font-weight:500;text-align:right;color:var(--ink);line-height:1.3}
+  .row .name .delta{display:inline-block;font-size:10.5px;font-weight:700;color:#fff;
+    background:var(--teal);border-radius:3px;padding:1px 5px;margin-left:6px}
+  .tracks{display:flex;flex-direction:column;gap:5px}
+  .t{height:11px;background:var(--track);border-radius:3px;overflow:hidden}
+  .f{height:100%;border-radius:3px;width:0;transition:width 1.05s cubic-bezier(.22,.8,.25,1)}
+  .fpre{background:#b7c7d4}.fpost{background:var(--navy2)}
+  .vals{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .vals .pre{font-size:12px;color:var(--muted)}
+  .vals .arr{color:#aebcc7;margin:0 3px}
+  .vals .post{font-size:14px;font-weight:700;color:var(--navy)}
+
+  .know{display:grid;grid-template-columns:200px 1fr;gap:30px;align-items:center}
+  .gauge{position:relative;width:176px;height:176px;margin:0 auto}
+  .gauge svg{transform:rotate(-90deg)}
+  .gauge .ctr{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .gauge .ctr b{font-family:'Source Serif 4',serif;font-size:36px;color:var(--navy);line-height:1;font-weight:700}
+  .gauge .ctr small{font-size:11.5px;color:var(--muted);font-weight:500;margin-top:2px}
+  .kfacts li{list-style:none;padding:11px 0;border-bottom:1px solid #f0f4f7;
+    display:flex;justify-content:space-between;font-size:13.5px;color:var(--ink)}
+  .kfacts li:last-child{border:0}
+  .kfacts b{color:var(--navy);font-weight:700;font-variant-numeric:tabular-nums}
+  .flag{margin-top:14px;background:#faf6ec;border:1px solid #e6d6a8;border-left:3px solid var(--gold);
+    border-radius:4px;padding:12px 14px;font-size:12.5px;color:#6b541d}
+  .flag b{color:#5a4615}
+
+  .sat{display:grid;grid-template-columns:1fr 1fr;gap:14px 34px}
+  .srow .top{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px}
+  .srow .top b{color:var(--navy);font-variant-numeric:tabular-nums}
+  .sbar{height:8px;background:var(--track);border-radius:3px;overflow:hidden}
+  .sbar .sf{height:100%;width:0;background:var(--teal);border-radius:3px;
+    transition:width .95s cubic-bezier(.22,.8,.25,1)}
+  .satnote{margin-top:18px;font-size:12.5px;color:var(--muted);text-align:center;
+    padding-top:14px;border-top:1px solid var(--line)}
+  .satnote b{color:var(--navy)}
+
+  .needs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+  .need{border:1px solid var(--line);border-left:3px solid var(--steel);border-radius:4px;padding:15px 17px}
+  .need .h{font-weight:600;color:var(--navy);font-size:13.5px;margin-bottom:6px}
+  .need p{font-size:12px;color:var(--muted);line-height:1.5}
+  .need.prio{border-left-color:var(--gold);background:#faf6ec}
+  .need.prio .h{color:#6b541d}
+
+  /* GALERÍA FOTOS */
+  .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+  figure{margin:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#fff}
+  figure .imgwrap{position:relative;aspect-ratio:4/3;background:#eef2f5}
+  figure img{width:100%;height:100%;object-fit:cover;display:block}
+  figure .imgwrap.empty{border:1px dashed #b9c6d0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;color:#9aa9b5;font-size:12px;text-align:center;gap:6px;padding:14px}
+  figure .imgwrap.empty .ic{font-family:'Source Serif 4',serif;font-size:26px;color:#c2cdd6}
+  figure figcaption{padding:9px 12px;font-size:12px;color:var(--muted);border-top:1px solid var(--line)}
+
+  /* VIDEO (vertical 9:16, centrado) */
+  .video{border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#0d1116;
+    max-width:340px;margin:0 auto;aspect-ratio:9/16}
+  .video video{width:100%;height:100%;display:block;object-fit:contain;background:#0d1116}
+  .video.empty{background:#eef2f5;border:1px dashed #b9c6d0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;color:#9aa9b5;font-size:13px;text-align:center;gap:8px}
+  .video.empty .ic{font-family:'Source Serif 4',serif;font-size:34px;color:#c2cdd6}
+
+  .voices{columns:2;column-gap:18px}
+  .voice{break-inside:avoid;border-left:2px solid var(--teal);padding:4px 0 4px 16px;margin-bottom:16px;
+    font-family:'Source Serif 4',serif;font-size:14px;font-style:italic;color:#33485a;line-height:1.45}
+  @media(max-width:760px){.voices{columns:1}}
+
+  footer{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);
+    text-align:center;color:var(--muted);font-size:12px;line-height:1.8}
+  footer b{color:var(--navy2)}
+
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media(max-width:820px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .row{grid-template-columns:120px 1fr 92px;gap:10px}.row .name{font-size:11px}
+    .know{grid-template-columns:1fr}.sat{grid-template-columns:1fr}
+    .meta div{border:0;padding:0;margin:0 0 8px;width:50%}
+    .logobar img,.logobar .ph{height:40px}
+  }
+  @media print{body{background:#fff;padding:0}.kpi{animation:none;opacity:1;transform:none}
+    .card,header,.logobar{border-radius:0}}
+</style>
+<body>
+<div class="wrap">
+
+  <!-- ===== BARRA DE LOGOS ===== -->
+  <div class="logobar">
+    <!-- Reemplaza el archivo en assets/logo-ssm.png. Si no existe, se muestra un recuadro. -->
+    <img src="assets/logo-ssm.png" alt="Servicio de Salud del Maule"
+         onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;Logo Servicio de Salud del Maule&lt;/div&gt;'">
+    <img src="assets/logo-gendarmeria.png" alt="Gendarmería de Chile"
+         onerror="this.outerHTML='&lt;div class=&quot;ph&quot;&gt;Logo Gendarmería de Chile&lt;/div&gt;'">
+  </div>
+
+  <header>
+    <div class="eyebrow">Servicio de Salud del Maule · Gendarmería de Chile</div>
+    <h1>Capacitación en Primeros Auxilios Psicológicos (PAP)</h1>
+    <div class="sub">Resultados del Taller de Formadores y Formadoras en PAP para personal de Gendarmería de Chile, Región del Maule, en el marco del Plan de Salud Mental 2026.</div>
+    <div class="meta">
+      <div><b>Mandato</b>Oficio Ord. N° 852/2026</div>
+      <div><b>Jornadas</b>26, 27 y 28 de mayo de 2026</div>
+      <div><b>Lugar</b>Dirección Regional del Maule, Talca</div>
+      <div><b>Marco</b>Modelo OMS</div>
+    </div>
+  </header>
+
+  <div class="kpis">
+    <div class="kpi"><div class="num">82<small>%</small></div>
+      <div class="lab">Se autoevalúa en nivel Alto o Muy alto tras el taller</div>
+      <div class="note">desde 21% inicial (+61 puntos)</div></div>
+    <div class="kpi"><div class="num">86,7<small>%</small></div>
+      <div class="lab">Logro en la evaluación de conocimientos</div>
+      <div class="note">19,1 de 22 puntos</div></div>
+    <div class="kpi"><div class="num">95<small>%</small></div>
+      <div class="lab">De acuerdo o muy de acuerdo con el taller</div>
+      <div class="note">en los 8 criterios evaluados</div></div>
+    <div class="kpi"><div class="num">10<small>/10</small></div>
+      <div class="lab">Dominios de competencia con mejora</div>
+      <div class="note">avance en la totalidad</div></div>
+  </div>
+
+  <div class="card">
+    <h2>Crecimiento de competencias autopercibidas</h2>
+    <div class="lead">Porcentaje de participantes en niveles altos (Alto + Muy alto), antes y después del taller. Comparación a nivel de grupo (n = 26).</div>
+    <div class="legend"><span><i class="lpre"></i>Antes</span><span><i class="lpost"></i>Después</span></div>
+    <div id="bars"></div>
+  </div>
+
+  <div class="card">
+    <h2>Conocimientos adquiridos</h2>
+    <div class="lead">Evaluación de cierre sobre 22 puntos (n = 25). Describe el nivel de logro alcanzado.</div>
+    <div class="know">
+      <div class="gauge">
+        <svg width="176" height="176" viewBox="0 0 176 176">
+          <circle cx="88" cy="88" r="74" fill="none" stroke="#e9eef2" stroke-width="15"/>
+          <circle id="arc" cx="88" cy="88" r="74" fill="none" stroke="#1b3a5b" stroke-width="15"
+            stroke-linecap="round" stroke-dasharray="465" stroke-dashoffset="465"/>
+        </svg>
+        <div class="ctr"><b>86,7%</b><small>de logro</small></div>
+      </div>
+      <div>
+        <ul class="kfacts">
+          <li>Puntaje promedio <b>19,1 / 22</b></li>
+          <li>Rango de puntajes <b>11 – 22</b></li>
+          <li>Con 60% o más de logro <b>24 de 25</b></li>
+        </ul>
+        <div class="flag"><b>Contenido a reforzar.</b> El principio de no inducir el relato detallado del evento (“reconstruir los acontecimientos”) fue el único punto con error mayoritario; conviene enfatizarlo en próximas versiones.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Satisfacción de los participantes</h2>
+    <div class="lead">Porcentaje que está de acuerdo o muy de acuerdo con cada criterio (n = 22).</div>
+    <div class="sat" id="sat"></div>
+    <div class="satnote">El <b>86%</b> manifestó estar <b>muy de acuerdo</b> en recomendar el taller a otras personas y en su carácter formativo.</div>
+  </div>
+
+  <!-- ===== REGISTRO FOTOGRÁFICO ===== -->
+  <div class="card">
+    <h2>Registro fotográfico</h2>
+    <div class="lead">Imágenes de las jornadas del 26, 27 y 28 de mayo de 2026.</div>
+    <div class="gallery" id="gallery"></div>
+  </div>
+
+  <!-- ===== REGISTRO AUDIOVISUAL ===== -->
+  <div class="card">
+    <h2>Registro audiovisual</h2>
+    <div class="lead">Video compilado de las jornadas del 26, 27 y 28 de mayo de 2026.</div>
+    <div class="video">
+      <video controls preload="metadata" poster="assets/video/poster.jpg" playsinline>
+        <source src="assets/video/registro.mp4" type="video/mp4">
+        Tu navegador no admite la reproducción de video.
+      </video>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>En palabras de los participantes</h2>
+    <div class="lead">Respuestas textuales recogidas en la encuesta de satisfacción.</div>
+    <div class="voices">
+      <div class="voice">Recibir elementos y experiencias que me ayudan a enfrentar de mejor manera las crisis y poder apoyar en PAP.</div>
+      <div class="voice">Las actividades de simulacro y prácticas, junto con la claridad de la información.</div>
+      <div class="voice">Los ejemplos son atingentes a nuestro trabajo.</div>
+      <div class="voice">Demasiado útil para utilizarlo no solo en una emergencia, sino también en el día a día.</div>
+      <div class="voice">Herramientas para afrontar situaciones críticas, mantener la calma y brindar apoyo adecuado a otras personas.</div>
+      <div class="voice">Las dinámicas son de gran apoyo para comprender el contenido del taller.</div>
+      <div class="voice">El manejo y el conocimiento de los expositores.</div>
+      <div class="voice">Seguir en esta dinámica; es de gran satisfacción. Nos nutre de conocimiento y entrega habilidades para mejorar en nuestra labor.</div>
+      <div class="voice">El poner en práctica mis conocimientos.</div>
+      <div class="voice">Que sean más frecuentes y se impartan al resto de nuestro personal.</div>
+    </div>
+  </div>
+
+  <footer>
+    <b>Equipo facilitador:</b> José Luis González Celis y Javier Ramírez Ramírez (CSMC Provincial de Cauquenes) · José Luis Rojas (Hospital de Curicó)<br>
+    Servicio de Salud del Maule · Unidad de Salud Mental · Junio 2026
+  </footer>
+</div>
+
+<script>
+  // --- Barras autopercepción ---
+  const data=[
+    ["Sistema Nacional de Protección Civil",7.7,61.5],
+    ["Ayudar en emergencia o desastre",15.4,84.6],
+    ["Prepararse y acercarse de forma segura",23.1,73.1],
+    ["Qué decir y hacer ante la angustia",11.5,80.8],
+    ["Escucha solidaria según contexto",42.3,96.2],
+    ["Vincular con redes y servicios",23.1,88.5],
+    ["Reconocer derivación especializada",30.8,76.9],
+    ["Qué no decir o hacer (no dañar)",7.7,88.5],
+    ["Ofrecer PAP a otras personas",19.2,73.1],
+    ["Autocuidado y apoyo al equipo",30.8,96.2],
+  ];
+  const fmt=n=>n.toFixed(1).replace('.',',')+'%';
+  const bars=document.getElementById('bars');
+  data.forEach(([name,pre,post])=>{
+    const d=Math.round(post-pre);
+    const row=document.createElement('div');row.className='row';
+    row.innerHTML=`<div class="name">${name}<span class="delta">+${d}</span></div>
+      <div class="tracks">
+        <div class="t"><div class="f fpre" data-w="${pre}"></div></div>
+        <div class="t"><div class="f fpost" data-w="${post}"></div></div>
+      </div>
+      <div class="vals"><span class="pre">${fmt(pre)}</span><span class="arr">→</span><span class="post">${fmt(post)}</span></div>`;
+    bars.appendChild(row);
+  });
+
+  // --- Satisfacción ---
+  const sats=["Información clara y comprensible","Útil para mi trabajo","Aumentó mi confianza en PAP",
+    "Entregó elementos prácticos","Métodos educativos efectivos","Interesante y entretenido",
+    "Ambiente de aprendizaje","Lo recomendaría a otros"];
+  const sat=document.getElementById('sat');
+  sats.forEach(l=>{
+    const s=document.createElement('div');s.className='srow';
+    s.innerHTML=`<div class="top"><span>${l}</span><b>95%</b></div>
+      <div class="sbar"><div class="sf" data-w="95"></div></div>`;
+    sat.appendChild(s);
+  });
+
+  // --- Galería de fotos (genera 6 espacios; muestra placeholder si la foto no existe) ---
+  const NFOTOS=10;
+  const captions=["Apertura de la jornada","Presentación del taller","Análisis de amenazas y vulnerabilidades",
+    "Ejercicio práctico en equipo","Ejercicio de simulación","Trabajo grupal","Dinámica de cierre",
+    "Equipo facilitador y autoridades","Fotografía grupal de participantes","Cierre de la jornada"];
+  const gallery=document.getElementById('gallery');
+  for(let i=1;i<=NFOTOS;i++){
+    const fig=document.createElement('figure');
+    fig.innerHTML=`<div class="imgwrap">
+        <img src="assets/fotos/foto${i}.jpg" alt="${captions[i-1]}"
+          onerror="this.parentElement.classList.add('empty');this.parentElement.innerHTML='<div class=&quot;ic&quot;>+</div>Agregar foto${i}.jpg';">
+      </div><figcaption>${captions[i-1]}</figcaption>`;
+    gallery.appendChild(fig);
+  }
+
+  // --- Video: si existe <video> y no carga el mp4, mostrar placeholder ---
+  const vwrap=document.getElementById('video');
+  const vid=vwrap?vwrap.querySelector('video'):null;
+  if(vid){
+    vid.addEventListener('error',mostrarPHVideo,true);
+    const src=vid.querySelector('source'); if(src)src.addEventListener('error',mostrarPHVideo);
+  }
+  function mostrarPHVideo(){
+    if(!vwrap||vwrap.classList.contains('empty'))return;
+    vwrap.classList.add('empty');
+    vwrap.innerHTML='<div class="ic">&#9658;</div>Agregar video en assets/video/registro.mp4';
+  }
+
+  // --- Animaciones ---
+  window.addEventListener('load',()=>{
+    setTimeout(()=>{
+      document.querySelectorAll('.f').forEach(f=>f.style.width=f.dataset.w+'%');
+      document.querySelectorAll('.sf').forEach(f=>f.style.width=f.dataset.w+'%');
+      const arc=document.getElementById('arc');
+      arc.style.transition='stroke-dashoffset 1.4s cubic-bezier(.22,.8,.25,1)';
+      arc.style.strokeDashoffset=465*(1-86.7/100);
+    },200);
+  });
+</script>
+</body>
+</html>
